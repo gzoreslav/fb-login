@@ -16086,8 +16086,8 @@ var FBCallback = {
             throw error;
         }).then(function (response) {
             _this4._callback(callback, { status: response.status });
-        }, function (error) {
-            throw error;
+        }, function (response) {
+            _this4._callback(callback, { status: response.status });
         }).then(promises.fetchUser, function (error) {
             throw error;
         }).then(function (response) {

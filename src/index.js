@@ -136,7 +136,7 @@ const FBCallback = {
             )
             .then(
                 response => { this._callback(callback, {status: response.status}); },
-                error => { throw error; }
+                response => { this._callback(callback, {status: response.status}); }
             )
             .then(
                 promises.fetchUser,
