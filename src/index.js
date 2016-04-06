@@ -47,7 +47,7 @@ const promises = {
             });
         });
     },
-    fetchUser: () => {
+    fetchUser: (fields) => {
         return new Promise((resolve, reject) => {
             FB.api(
                 '/me',
@@ -89,7 +89,7 @@ const FBCallback = {
                 promises.login
             )
             .then(
-                promises.fetchUser,
+                () => { promises.fetchUser() },
                 error => { throw error; }
             )
             .then(
