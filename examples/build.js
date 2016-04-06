@@ -14,7 +14,7 @@ var params = {
 };
 
 function callback(state) {
-	document.getElementById('status').innerHTML(state.status);
+	document.getElementById('status').innerHTML = state.status;
 	console.log(state);
 }
 
