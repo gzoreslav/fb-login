@@ -16024,7 +16024,7 @@ var FBCallback = {
     init: function init(params, callback) {
         var _this = this;
 
-        this.result = { loading: true };
+        this.result = { loading: true, data: undefined, status: 'unknown', error: undefined };
         this._callback(callback);
         promises.init(params).then(function (response) {
             _this._callback(callback, { status: 'init' });
@@ -16038,7 +16038,7 @@ var FBCallback = {
     login: function login(params, callback) {
         var _this2 = this;
 
-        this.result = { loading: true };
+        this.result = { loading: true, data: undefined, status: 'unknown', error: undefined };
         this._callback(callback);
         promises.init(params).then(promises.checkLoginState, function (error) {
             throw error;
@@ -16062,14 +16062,14 @@ var FBCallback = {
     logout: function logout(params, callback) {
         var _this3 = this;
 
-        this.result = { loading: true };
+        this.result = { loading: true, data: undefined, status: 'unknown', error: undefined };
         this._callback(callback);
         promises.init(params).then(promises.checkLoginState, function () {
             _this3._callback(callback, { loading: false, data: undefined, status: 'disconnected' });
-        }).then(promises.logout, function () {
-            _this3._callback(callback, { data: {}, status: 'disconnected' });
-        }).then(function () {
-            _this3._callback(callback, { loading: false, data: undefined });
+        }).then(promises.logout, function (response) {
+            _this3._callback(callback, { data: {}, status: response.status });
+        }).then(function (response) {
+            _this3._callback(callback, { loading: false, status: response.status, data: undefined });
         }, function (error) {
             throw error;
         }).catch(function (error) {
@@ -16080,7 +16080,7 @@ var FBCallback = {
     checkStatus: function checkStatus(params, callback) {
         var _this4 = this;
 
-        this.result = { loading: true };
+        this.result = { loading: true, data: undefined, status: 'unknown', error: undefined };
         this._callback(callback);
         promises.init(params).then(promises.checkLoginState, function (error) {
             throw error;
@@ -16095,7 +16095,7 @@ var FBCallback = {
         }, function (error) {
             throw error;
         }).catch(function (error) {
-            _this4._callback(callback, { loading: false, data: {}, status: 'unknown' });
+            _this4._callback(callback, { loading: false, data: undefined, status: 'unknown', error: error });
             console.warn(error);
         });
     }

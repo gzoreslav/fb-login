@@ -64,7 +64,7 @@ const FBCallback = {
 		callback(this.result);
 	},
     init(params, callback) {
-        this.result = {loading: true};
+        this.result = {loading: true, data: undefined, status: 'unknown', error: undefined};
         this._callback(callback);
         promises.init(params)
             .then(
@@ -77,7 +77,7 @@ const FBCallback = {
             });
     },
     login(params, callback) {
-    	this.result = {loading: true};
+    	this.result = {loading: true, data: undefined, status: 'unknown', error: undefined};
     	this._callback(callback);
         promises.init(params)
             .then(
@@ -106,7 +106,7 @@ const FBCallback = {
             });
     },
     logout(params, callback) {
-    	this.result = {loading: true};
+    	this.result = {loading: true, data: undefined, status: 'unknown', error: undefined};
     	this._callback(callback);
         promises.init(params)
             .then(
@@ -115,10 +115,10 @@ const FBCallback = {
             )
             .then(
                 promises.logout,
-                () => { this._callback(callback, {data: {}, status: 'disconnected'}); }
+                response => { this._callback(callback, {data: {}, status: response.status}); }
             )
             .then(
-                () => { this._callback(callback, {loading: false, data: undefined}); },
+                response => { this._callback(callback, {loading: false, status: response.status, data: undefined}); },
                 error => { throw error; }
             )
             .catch(error => {
@@ -127,7 +127,7 @@ const FBCallback = {
             });
     },
     checkStatus(params, callback) {
-    	this.result = {loading: true};
+    	this.result = {loading: true, data: undefined, status: 'unknown', error: undefined};
     	this._callback(callback);
         promises.init(params)
             .then(
@@ -147,7 +147,7 @@ const FBCallback = {
                 error => { throw error; }
             )
             .catch((error) => {
-                this._callback(callback, {loading: false, data: {}, status: 'unknown'});
+                this._callback(callback, {loading: false, data: undefined, status: 'unknown', error: error});
                 console.warn(error);
             });
     }
