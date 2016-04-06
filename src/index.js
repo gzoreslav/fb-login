@@ -115,15 +115,17 @@ const FBCallback = {
             )
             .then(
                 promises.logout,
-                response => { this._callback(callback, {data: {}, status: response.status}); }
+                response => { this._callback(callback, {data: {}, status: response.status, error: undefined}); throw undefined; }
             )
             .then(
                 response => { this._callback(callback, {loading: false, status: response.status, data: undefined}); },
                 error => { throw error; }
             )
             .catch(error => {
-                this._callback(callback, {loading: false, data: undefined, status: 'unknown', error: error});
-                console.warn(error);
+                if (error !== undefined) {
+                    this._callback(callback, {loading: false, data: undefined, status: 'unknown', error: error});
+                    console.warn(error);
+                }
             });
     },
     checkStatus(params, callback) {

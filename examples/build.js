@@ -16067,14 +16067,16 @@ var FBCallback = {
         promises.init(params).then(promises.checkLoginState, function () {
             _this3._callback(callback, { loading: false, data: undefined, status: 'disconnected' });
         }).then(promises.logout, function (response) {
-            _this3._callback(callback, { data: {}, status: response.status });
+            _this3._callback(callback, { data: {}, status: response.status, error: undefined });throw undefined;
         }).then(function (response) {
             _this3._callback(callback, { loading: false, status: response.status, data: undefined });
         }, function (error) {
             throw error;
         }).catch(function (error) {
-            _this3._callback(callback, { loading: false, data: undefined, status: 'unknown', error: error });
-            console.warn(error);
+            if (error !== undefined) {
+                _this3._callback(callback, { loading: false, data: undefined, status: 'unknown', error: error });
+                console.warn(error);
+            }
         });
     },
     checkStatus: function checkStatus(params, callback) {
