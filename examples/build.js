@@ -15989,6 +15989,8 @@ var promises = {
     checkLoginState: function checkLoginState() {
         return new Promise(function (resolve, reject) {
             FB.getLoginStatus(function (response) {
+                console.log('e');
+                console.log(response);
                 response.status === 'connected' ? resolve(response) : reject(response);
             });
         });

@@ -29,6 +29,8 @@ const promises = {
     checkLoginState: () => {
         return new Promise((resolve, reject) => {
             FB.getLoginStatus((response) => {
+                console.log('e');
+                console.log(response);
                 response.status === 'connected' ? resolve(response) : reject(response);
             });
         });
