@@ -111,7 +111,7 @@ const FBCallback = {
             )
             .then(
                 promises.logout,
-                () => { this._callback(callback, {data: {}, status: 'unknown'}); }
+                () => { this._callback(callback, {data: {}, status: 'disconnected'}); }
             )
             .then(
                 () => { this._callback(callback, {loading: false, data: {}, status: 'disconnected'}); },

@@ -16063,7 +16063,7 @@ var FBCallback = {
         promises.init(params).then(promises.checkLoginState, function (error) {
             throw error;
         }).then(promises.logout, function () {
-            _this3._callback(callback, { data: {}, status: 'unknown' });
+            _this3._callback(callback, { data: {}, status: 'disconnected' });
         }).then(function () {
             _this3._callback(callback, { loading: false, data: {}, status: 'disconnected' });
         }, function (error) {
