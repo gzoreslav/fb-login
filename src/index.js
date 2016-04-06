@@ -47,11 +47,11 @@ const promises = {
             });
         });
     },
-    fetchUser: (fields) => {
+    fetchUser: () => {
         return new Promise((resolve, reject) => {
             FB.api(
                 '/me',
-                {fields: fields ? fields.join(', ') : 'first_name, last_name, gender'},
+                {fields: 'first_name, last_name, gender'},
                 response => response.error ? reject(response) : resolve(response)
             );
         });
@@ -89,7 +89,7 @@ const FBCallback = {
                 promises.login
             )
             .then(
-                () => { promises.fetchUser() },
+                promises.fetchUser,
                 error => { throw error; }
             )
             .then(

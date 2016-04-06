@@ -15997,9 +15997,9 @@ var promises = {
             });
         });
     },
-    fetchUser: function fetchUser(fields) {
+    fetchUser: function fetchUser() {
         return new Promise(function (resolve, reject) {
-            FB.api('/me', { fields: fields ? fields.join(', ') : 'first_name, last_name, gender' }, function (response) {
+            FB.api('/me', { fields: 'first_name, last_name, gender' }, function (response) {
                 return response.error ? reject(response) : resolve(response);
             });
         });
@@ -16034,9 +16034,7 @@ var FBCallback = {
             throw error;
         }).then(function (response) {
             _this2._callback(callback, { status: response.status });
-        }, promises.login).then(function () {
-            promises.fetchUser();
-        }, function (error) {
+        }, promises.login).then(promises.fetchUser, function (error) {
             throw error;
         }).then(function (response) {
             _this2._callback(callback, { loading: false, data: response, status: 'connected' });
