@@ -115,7 +115,7 @@ const FBCallback = {
             )
             .then(
                 promises.logout,
-                response => { this._callback(callback, {data: {}, status: response.status, error: undefined}); throw undefined; }
+                response => { this._callback(callback, {data: undefined, status: response.status, error: undefined}); throw undefined; }
             )
             .then(
                 response => { this._callback(callback, {loading: false, status: response.status, data: undefined}); },
