@@ -1,6 +1,6 @@
 {
   "name": "fb-login",
-  "version": "0.1.1",
+  "version": "0.0.1",
   "description": "Library for Facebook authentication",
   "main": "lib/index.js",
   "scripts": {

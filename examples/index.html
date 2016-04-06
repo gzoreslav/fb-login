@@ -8,8 +8,14 @@
 	<h1>FB Login library examples</h1>
 	<p>Use <strong>window.facebook</strong> object in browser console for testing purposes</p>
 	<div>
-		<h2>Callback approach</h2>
-		<button onClick="cLogin();">Login</button>
+		<h2>FB Status</h2>
+		<p>Status: <span id="status">unknown</span></p>
+	</div>
+	<div>
+		<h3>Callback approach</h3>
+		<button id="login" onClick="cLogin();">Login</button>
+		<button id="logout" onClick="cLogout();">Logout</button>
+		<button onClick="cCheckStatus();">Check Status</button>
 	</div>
     <script src="build.js"></script>
 </body>

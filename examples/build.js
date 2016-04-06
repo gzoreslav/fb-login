@@ -14,11 +14,20 @@ var params = {
 };
 
 function callback(state) {
+	document.getElementById('status').innerHTML(state.status);
 	console.log(state);
 }
 
 window.cLogin = function () {
 	_index2.default.callback.login(params, callback);
+};
+
+window.cLogout = function () {
+	_index2.default.callback.logout(params, callback);
+};
+
+window.cCheckStatus = function () {
+	_index2.default.callback.checkStatus(params, callback);
 };
 
 },{"../src/index.js":3}],2:[function(require,module,exports){

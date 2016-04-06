@@ -7,9 +7,18 @@ const params = {
 };
 
 function callback(state) {
+	document.getElementById('status').innerHTML(state.status);
 	console.log(state);
 }
 
 window.cLogin = () => {
 	facebook.callback.login(params, callback);
+}
+
+window.cLogout = () => {
+	facebook.callback.logout(params, callback);
+}
+
+window.cCheckStatus = () => {
+	facebook.callback.checkStatus(params, callback);
 }
