@@ -16069,6 +16069,7 @@ var FBCallback = {
         }, function (error) {
             throw error;
         }).catch(function (error) {
+            console.log('error');
             _this3._callback(callback, { loading: false, data: {}, status: 'unknown', error: error });
             console.warn(error);
         });
@@ -16081,13 +16082,13 @@ var FBCallback = {
         promises.init(params).then(promises.checkLoginState, function (error) {
             throw error;
         }).then(function (response) {
-            _this4._callback(callback, { status: response.status });
+            console.log(response.status);_this4._callback(callback, { status: response.status });
         }, function (error) {
             throw error;
         }).then(promises.fetchUser, function (error) {
             throw error;
         }).then(function (response) {
-            _this4._callback(callback, { loading: false, data: response, status: 'connected' });
+            _this4._callback(callback, { loading: false, data: response });
         }, function (error) {
             throw error;
         }).catch(function (error) {

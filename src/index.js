@@ -118,6 +118,7 @@ const FBCallback = {
                 error => { throw error; }
             )
             .catch(error => {
+                console.log('error');
                 this._callback(callback, {loading: false, data: {}, status: 'unknown', error: error});
                 console.warn(error);
             });
@@ -131,7 +132,7 @@ const FBCallback = {
                 error => { throw error; }
             )
             .then(
-                response => { this._callback(callback, {status: response.status}); },
+                response => { console.log(response.status); this._callback(callback, {status: response.status}); },
                 error => { throw error; }
             )
             .then(
@@ -139,7 +140,7 @@ const FBCallback = {
                 error => { throw error; }
             )
             .then(
-                response => { this._callback(callback, {loading: false, data: response, status: 'connected'}); },
+                response => { this._callback(callback, {loading: false, data: response}); },
                 error => { throw error; }
             )
             .catch((error) => {
