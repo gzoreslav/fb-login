@@ -93,7 +93,7 @@ const FBCallback = {
                 error => { throw error; }
             )
             .then(
-                response => { this._callback(callback, {loading: false, data: response, status: 'connected'}); },
+                response => { this._callback(callback, {loading: false, data: response}); },
                 error => { throw error; }
             )
             .catch((error) => {
@@ -114,7 +114,7 @@ const FBCallback = {
                 () => { this._callback(callback, {data: {}, status: 'unknown'}); }
             )
             .then(
-                () => { this._callback(callback, {loading: false, data: {}, status: 'unknown'}); },
+                () => { this._callback(callback, {loading: false, data: {}, status: 'disconnected'}); },
                 error => { throw error; }
             )
             .catch(error => {

@@ -16047,7 +16047,7 @@ var FBCallback = {
         }, promises.login).then(promises.fetchUser, function (error) {
             throw error;
         }).then(function (response) {
-            _this2._callback(callback, { loading: false, data: response, status: 'connected' });
+            _this2._callback(callback, { loading: false, data: response });
         }, function (error) {
             throw error;
         }).catch(function (error) {
@@ -16065,7 +16065,7 @@ var FBCallback = {
         }).then(promises.logout, function () {
             _this3._callback(callback, { data: {}, status: 'unknown' });
         }).then(function () {
-            _this3._callback(callback, { loading: false, data: {}, status: 'unknown' });
+            _this3._callback(callback, { loading: false, data: {}, status: 'disconnected' });
         }, function (error) {
             throw error;
         }).catch(function (error) {
