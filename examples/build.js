@@ -16087,7 +16087,7 @@ var FBCallback = {
         }).then(function (response) {
             _this4._callback(callback, { status: response.status });
         }, function (response) {
-            _this4._callback(callback, { status: response.status });
+            _this4._callback(callback, { loading: false, status: response.status });throw undefined;
         }).then(promises.fetchUser, function (error) {
             throw error;
         }).then(function (response) {
@@ -16095,8 +16095,10 @@ var FBCallback = {
         }, function (error) {
             throw error;
         }).catch(function (error) {
-            _this4._callback(callback, { loading: false, data: undefined, status: 'unknown', error: error });
-            console.warn(error);
+            if (error !== undefined) {
+                _this4._callback(callback, { loading: false, data: undefined, status: 'unknown', error: error });
+                console.warn(error);
+            }
         });
     }
 };

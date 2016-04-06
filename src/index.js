@@ -136,7 +136,7 @@ const FBCallback = {
             )
             .then(
                 response => { this._callback(callback, {status: response.status}); },
-                response => { this._callback(callback, {status: response.status}); }
+                response => { this._callback(callback, {loading: false, status: response.status}); throw undefined;}
             )
             .then(
                 promises.fetchUser,
@@ -147,8 +147,10 @@ const FBCallback = {
                 error => { throw error; }
             )
             .catch((error) => {
-                this._callback(callback, {loading: false, data: undefined, status: 'unknown', error: error});
-                console.warn(error);
+                if (error !== undefined) {
+                    this._callback(callback, {loading: false, data: undefined, status: 'unknown', error: error});
+                    console.warn(error);
+                }
             });
     }
 };
