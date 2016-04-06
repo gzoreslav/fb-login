@@ -29,8 +29,6 @@ const promises = {
     checkLoginState: () => {
         return new Promise((resolve, reject) => {
             FB.getLoginStatus((response) => {
-                console.log('e');
-                console.log(response);
                 response.status === 'connected' ? resolve(response) : reject(response);
             });
         });
@@ -91,6 +89,10 @@ const FBCallback = {
                 promises.login
             )
             .then(
+                response => { this._callback(callback, {status: response.status}); },
+                error => { throw error; }
+            )
+            .then(
                 promises.fetchUser,
                 error => { throw error; }
             )
@@ -99,7 +101,7 @@ const FBCallback = {
                 error => { throw error; }
             )
             .catch((error) => {
-                this._callback(callback, {loading: false, data: {}, status: 'unknown', error: error});
+                this._callback(callback, {loading: false, data: undefined, status: 'unknown', error: error});
                 console.warn(error);
             });
     },
@@ -109,19 +111,18 @@ const FBCallback = {
         promises.init(params)
             .then(
                 promises.checkLoginState,
-                error => { throw error; }
+                () => { this._callback(callback, {loading: false, data: undefined, status: 'disconnected'}); }
             )
             .then(
                 promises.logout,
                 () => { this._callback(callback, {data: {}, status: 'disconnected'}); }
             )
             .then(
-                () => { this._callback(callback, {loading: false, data: {}, status: 'disconnected'}); },
+                () => { this._callback(callback, {loading: false, data: undefined}); },
                 error => { throw error; }
             )
             .catch(error => {
-                console.log('error');
-                this._callback(callback, {loading: false, data: {}, status: 'unknown', error: error});
+                this._callback(callback, {loading: false, data: undefined, status: 'unknown', error: error});
                 console.warn(error);
             });
     },
@@ -134,7 +135,7 @@ const FBCallback = {
                 error => { throw error; }
             )
             .then(
-                response => { console.log(response.status); this._callback(callback, {status: response.status}); },
+                response => { this._callback(callback, {status: response.status}); },
                 error => { throw error; }
             )
             .then(

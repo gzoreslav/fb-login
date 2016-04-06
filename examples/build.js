@@ -15989,8 +15989,6 @@ var promises = {
     checkLoginState: function checkLoginState() {
         return new Promise(function (resolve, reject) {
             FB.getLoginStatus(function (response) {
-                console.log('e');
-                console.log(response);
                 response.status === 'connected' ? resolve(response) : reject(response);
             });
         });
@@ -16046,14 +16044,18 @@ var FBCallback = {
             throw error;
         }).then(function (response) {
             _this2._callback(callback, { status: response.status });
-        }, promises.login).then(promises.fetchUser, function (error) {
+        }, promises.login).then(function (response) {
+            _this2._callback(callback, { status: response.status });
+        }, function (error) {
+            throw error;
+        }).then(promises.fetchUser, function (error) {
             throw error;
         }).then(function (response) {
             _this2._callback(callback, { loading: false, data: response });
         }, function (error) {
             throw error;
         }).catch(function (error) {
-            _this2._callback(callback, { loading: false, data: {}, status: 'unknown', error: error });
+            _this2._callback(callback, { loading: false, data: undefined, status: 'unknown', error: error });
             console.warn(error);
         });
     },
@@ -16062,17 +16064,16 @@ var FBCallback = {
 
         this.result = { loading: true };
         this._callback(callback);
-        promises.init(params).then(promises.checkLoginState, function (error) {
-            throw error;
+        promises.init(params).then(promises.checkLoginState, function () {
+            _this3._callback(callback, { loading: false, data: undefined, status: 'disconnected' });
         }).then(promises.logout, function () {
             _this3._callback(callback, { data: {}, status: 'disconnected' });
         }).then(function () {
-            _this3._callback(callback, { loading: false, data: {}, status: 'disconnected' });
+            _this3._callback(callback, { loading: false, data: undefined });
         }, function (error) {
             throw error;
         }).catch(function (error) {
-            console.log('error');
-            _this3._callback(callback, { loading: false, data: {}, status: 'unknown', error: error });
+            _this3._callback(callback, { loading: false, data: undefined, status: 'unknown', error: error });
             console.warn(error);
         });
     },
@@ -16084,7 +16085,7 @@ var FBCallback = {
         promises.init(params).then(promises.checkLoginState, function (error) {
             throw error;
         }).then(function (response) {
-            console.log(response.status);_this4._callback(callback, { status: response.status });
+            _this4._callback(callback, { status: response.status });
         }, function (error) {
             throw error;
         }).then(promises.fetchUser, function (error) {
