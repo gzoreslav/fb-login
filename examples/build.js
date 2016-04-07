@@ -17,6 +17,16 @@ function callback(state) {
 	document.getElementById('status').innerHTML = state.status;
 
 	console.log(state);
+
+	var process = state.loading ? 'loading' : 'loaded';
+	var connected = state.status === 'connected';
+	var firstname = state.data ? state.data.first_name : null;
+
+	console.log('process: ' + process);
+	console.log('connected: ' + connected);
+	if (firstname) {
+		console.log('your logged as: ' + firstname);
+	}
 }
 
 window.cLogin = function () {
