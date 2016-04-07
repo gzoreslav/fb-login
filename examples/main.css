@@ -1,0 +1,35 @@
+body {
+    margin: 30px auto;
+    background-color: #f8fcf8;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    width: 1024px;
+    color: #333;
+    font-size: 14px;
+}
+
+h1, h2, h3 {
+    color: #2F6FAD;
+}
+
+.well {
+	border: 1px solid #bbb;
+	border-radius: 5px;
+	padding: 0 10px 10px 10px;
+	text-align: center;
+	float: left;
+	margin-right: 20px;
+}
+
+.well.status {
+	float: right;
+	background-color: #FFC107;
+	margin: 0;
+}
+
+.help {
+	color: #555;
+	font-size: 80%;
+	border-top: 1px solid #777;
+    padding-top: 5px;
+    width: 60%;
+}

@@ -14,19 +14,15 @@ var params = {
 };
 
 function callback(state) {
-	document.getElementById('status').innerHTML = state.status;
-
 	console.log(state);
 
-	var process = state.loading ? 'loading' : 'loaded';
+	var process = state.loading ? 'loading...' : '';
 	var connected = state.status === 'connected';
-	var firstname = state.data ? state.data.first_name : null;
+	var user = state.data ? 'your logged as ' + state.data.first_name : '';
 
-	console.log('process: ' + process);
-	console.log('connected: ' + connected);
-	if (firstname) {
-		console.log('your logged as: ' + firstname);
-	}
+	document.getElementById('connected').innerHTML = connected;
+	document.getElementById('process').innerHTML = process;
+	document.getElementById('user').innerHTML = user;
 }
 
 window.cLogin = function () {

@@ -7,19 +7,15 @@ const params = {
 };
 
 function callback(state) {
-	document.getElementById('status').innerHTML = state.status;
-	
 	console.log(state);
 
-	const process = state.loading ? 'loading' : 'loaded';
+	const process = state.loading ? 'loading...' : '';
 	const connected = state.status === 'connected';
-	const firstname = state.data ? state.data.first_name : null;
+	const user = state.data ? `your logged as ${state.data.first_name}` : '';
 	
-	console.log('process: ' + process);
-	console.log('connected: ' + connected);
-	if (firstname) {
-		console.log('your logged as: ' + firstname);
-	}
+	document.getElementById('connected').innerHTML = connected;
+	document.getElementById('process').innerHTML = process;
+	document.getElementById('user').innerHTML = user;
 }
 
 window.cLogin = () => {

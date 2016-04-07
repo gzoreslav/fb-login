@@ -2,21 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>FB-login examples</title>
+    <title>facebook-login-promises examples</title>
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
-	<h1>FB Login library examples</h1>
-	<p>Use <strong>window.facebook</strong> object in browser console for testing purposes</p>
-	<div>
-		<h2>FB Status</h2>
-		<p>Status: <span id="status">unknown</span></p>
+	<h1>facebook-login-promises npm library examples</h1>
+	<div class="well status">
+		<h2>Facebook Login</h2>
+		<p>Connected: <span id="connected">unknown</span></p>
+		<p id="user"></p>
+		<p id="process"></p>
 	</div>
-	<div>
+	<div class="well">
 		<h3>Callback approach</h3>
-		<button id="login" onClick="cLogin();">Login</button>
-		<button id="logout" onClick="cLogout();">Logout</button>
+		<button id="cLogin" onClick="cLogin();">Login</button>
+		<button id="cLogout" onClick="cLogout();">Logout</button>
 		<button onClick="cCheckStatus();">Check Status</button>
 	</div>
+	<div class="well">
+		<h3>Promises approach</h3>
+		<button disabled id="pLogin" onClick="pLogin();">Login</button>
+		<button disabled id="pLogout" onClick="pLogout();">Logout</button>
+		<button disabled onClick="pCheckStatus();">Check Status</button>
+	</div>
+	<div style="clear: both;"></div>
+	<p class="help">* open browser console to see outputs. Use <strong>window.facebook</strong> object in browser console for testing purposes</p>
     <script src="build.js"></script>
 </body>
 </html>
