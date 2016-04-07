@@ -125,6 +125,8 @@ const FBCallback = {
                 if (error !== undefined) {
                     this._callback(callback, {loading: false, data: undefined, status: 'unknown', error: error});
                     console.warn(error);
+                } else {
+                    this._callback(callback, {loading: false});
                 }
             });
     },
@@ -152,6 +154,8 @@ const FBCallback = {
                 if (error !== undefined) {
                     this._callback(callback, {loading: false, data: undefined, status: 'unknown', error: error});
                     console.warn(error);
+                } else {
+                    this._callback(callback, {loading: false});
                 }
             });
     }

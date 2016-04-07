@@ -16082,6 +16082,8 @@ var FBCallback = {
             if (error !== undefined) {
                 _this3._callback(callback, { loading: false, data: undefined, status: 'unknown', error: error });
                 console.warn(error);
+            } else {
+                _this3._callback(callback, { loading: false });
             }
         });
     },
@@ -16106,6 +16108,8 @@ var FBCallback = {
             if (error !== undefined) {
                 _this4._callback(callback, { loading: false, data: undefined, status: 'unknown', error: error });
                 console.warn(error);
+            } else {
+                _this4._callback(callback, { loading: false });
             }
         });
     }
