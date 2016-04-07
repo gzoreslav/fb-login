@@ -89,7 +89,7 @@ const FBCallback = {
                 promises.login
             )
             .then(
-                response => { this._callback(callback, {status: response.status}); },
+                response => { this._callback(callback, {status: response ? response.status : this.result.status}); },
                 error => { throw error; }
             )
             .then(

@@ -16055,7 +16055,7 @@ var FBCallback = {
         }).then(function (response) {
             _this2._callback(callback, { status: response.status });
         }, promises.login).then(function (response) {
-            _this2._callback(callback, { status: response.status });
+            _this2._callback(callback, { status: response ? response.status : _this2.result.status });
         }, function (error) {
             throw error;
         }).then(promises.fetchUser, function (error) {
