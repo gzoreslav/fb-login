@@ -11,6 +11,10 @@ h1, h2, h3 {
     color: #2F6FAD;
 }
 
+h2, h3 {
+	border-bottom: 2px solid;
+}
+
 .well {
 	border: 1px solid #bbb;
 	border-radius: 5px;

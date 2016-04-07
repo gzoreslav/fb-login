@@ -7,26 +7,84 @@
 </head>
 <body>
 	<h1>facebook-login-promises npm library examples</h1>
+	<p>Simple library for Facebook Login.</p>
+	<p>Facebook SDK methods are wrapped in promises for better using. You may use Callback or Promises approach. You don't need to check if user logged out to run login method or check if user logged in to run logout method.</p>
+	<p>There are just three simple methods:</p>
+	<ul>
+		<li>login (with fetching user data),</li>
+		<li>logout,</li>
+		<li>checkStatus (with fetching user data).</li>
+	</ul>
+	<p>And you may run these methods in order you like. Outputed object has the following properties:</p>
+	<ul>
+		<li>loading - indicates progress (you may use it for spinner, etc.)</li>
+		<li>status - indicates if user connected to the FB App</li>
+		<li>data - show data for logged user (firstname, lastname, etc.)</li>
+		<li>error - display error if exists</li>
+	</ul>
+	<h2>Try it</h2>
 	<div class="well status">
-		<h2>Facebook Login</h2>
+		<h4>Facebook Login</h4>
 		<p>Connected: <span id="connected">unknown</span></p>
 		<p id="user"></p>
 		<p id="process"></p>
 	</div>
 	<div class="well">
-		<h3>Callback approach</h3>
+		<h4>Callback approach</h4>
 		<button id="cLogin" onClick="cLogin();">Login</button>
 		<button id="cLogout" onClick="cLogout();">Logout</button>
 		<button onClick="cCheckStatus();">Check Status</button>
 	</div>
 	<div class="well">
-		<h3>Promises approach</h3>
+		<h4>Promises approach</h4>
 		<button disabled id="pLogin" onClick="pLogin();">Login</button>
 		<button disabled id="pLogout" onClick="pLogout();">Logout</button>
 		<button disabled onClick="pCheckStatus();">Check Status</button>
 	</div>
 	<div style="clear: both;"></div>
 	<p class="help">* open browser console to see outputs. Use <strong>window.facebook</strong> object in browser console for testing purposes</p>
+	<h2>Code source</h2>
+	<pre class="prettyprint">
+import facebook from '../src/index.js';
+
+//setup your Facebook App
+const params = {
+    appId: '260170667658655'
+};
+
+/* === Callback approach === */
+
+//check Facebook login results in callback method
+function callback(result) {
+    console.log(result);
+
+    const process = result.loading ? 'loading...' : '';
+    const connected = result.status === 'connected';
+    const user = result.data ? `your logged as ${result.data.first_name}` : '';
+
+    document.getElementById('connected').innerHTML = connected;
+    document.getElementById('process').innerHTML = process;
+    document.getElementById('user').innerHTML = user;
+}
+
+function cLogin() {
+    facebook.callback.login(params, callback);
+}
+
+function cLogout() {
+    facebook.callback.logout(params, callback);
+}
+
+function cCheckStatus() {
+    facebook.callback.checkStatus(params, callback);
+}
+
+/* === Promises approach === */
+
+// [TODO]
+
+	</pre>
     <script src="build.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 </body>
 </html>
